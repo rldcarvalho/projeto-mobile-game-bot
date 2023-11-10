@@ -1,4 +1,4 @@
-from bot.start_ldplayer import start_ldplayer
+from bot.start_ldplayer import StartLdplayer
 
 
-start_ldplayer.ajust_window()
+StartLdplayer.ajust_window()

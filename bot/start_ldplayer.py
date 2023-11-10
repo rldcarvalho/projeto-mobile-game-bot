@@ -2,7 +2,7 @@ from utilities.window_handler import window_handler
 import time
 
 
-class start_ldplayer:
+class StartLdplayer:
     def ajust_window():
         # inicia a classe de focar janela
         wh_ldp = window_handler("LDPlayer")
