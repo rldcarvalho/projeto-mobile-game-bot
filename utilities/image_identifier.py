@@ -6,7 +6,8 @@ class ImageIdentifier:
         pass
 
     # busca a imagem requisitada podendo ser adicionado uma região de busca
-    def is_image_on_screen(self, image_path, region=None):
+    def is_image_on_screen(self, image_path, region=None, confidence=0.8):
         screen = pyautogui.screenshot(region=region)
-        location = pyautogui.locateOnScreen(image_path, confidence=0.8)
+        screen.save("captured_region.png")
+        location = pyautogui.locateOnScreen(image_path, confidence=confidence)
         return location is not None
