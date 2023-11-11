@@ -1,4 +1,5 @@
 import pyautogui
+import pytesseract
 
 
 class ImageIdentifier:
@@ -11,3 +12,12 @@ class ImageIdentifier:
         screen.save("captured_region.png")
         location = pyautogui.locateOnScreen(image_path, confidence=confidence)
         return location is not None
+
+    def extract_text_in_image(self, region=None):
+        screen = pyautogui.screenshot(region=region)
+        screen.save("captured_region.png")
+
+        pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+        text = pytesseract.image_to_string(screen, lang="por")
+
+        return ' '.join(text.split())
