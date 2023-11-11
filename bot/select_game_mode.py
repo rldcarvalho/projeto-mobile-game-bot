@@ -10,14 +10,11 @@ class SelectGameMode:
         pass
 
     def mission(self):
-        cm = ClickManager()
-
+        # clica no botão do mapa central se já não estiver
         self.center_map()
 
-        # clica no botão de missão
-        click_location = (151, 863)
-        cm.click_with_variation(click_location, 100, 15)
-        print("Aberto menu de missões")
+        # clica no botão de missão se já não estiver na tela
+        self.go_to_mission_screen()
 
         time.sleep(1)
 
@@ -62,6 +59,22 @@ class SelectGameMode:
 
             time.sleep(1)
 
+    def go_to_mission_screen(self):
+        cm = ClickManager()
+        im = ImageIdentifier()
+
+        # Variáveis para encontrar o botão de mapa
+        image_path = "bot/screenshots/screens/mission_screen.png"
+        search_region = (239, 85, 75, 95)
+
+        # Verifica se está na tela de missoes, se não, vai para ela
+        if (not im.is_image_on_screen(image_path, search_region)):
+            click_location = (151, 863)
+            cm.click_with_variation(click_location, 70, 15)
+            print("Entrando na tela de missões")
+
+            time.sleep(1)
+
     def select_mission(self):
         # Variáveis do clique e zonas dos botões de opções de missão
         mission_buttons = ((91, 814), (278, 814), (465, 814))
@@ -72,13 +85,20 @@ class SelectGameMode:
         combined_missions = list(zip(mission_buttons, search_regions))
         random.shuffle(combined_missions)
 
-        bad_mission = "bot/screenshots/minions/hogger_mission.png"
+        bad_mission = "Hogger"
 
         im = ImageIdentifier()
         cm = ClickManager()
 
         for (button, region) in combined_missions:
-            if not im.is_image_on_screen(bad_mission, region, confidence=1):
+            print("iteracao")
+            if not self.is_bad_mission(bad_mission, region):
                 cm.click_with_variation(button, 50, 10)
                 print("Missão selecionada")
                 break
+
+    def is_bad_mission(self, text, region):
+        im = ImageIdentifier()
+        extracted_text = im.extract_text_in_image(region)
+
+        return text == extracted_text

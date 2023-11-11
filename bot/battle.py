@@ -10,23 +10,28 @@ class Battle:
     # Realiza o procedimento para iniciar partida PVE
     def start(self):
         cm = ClickManager()
+        im = ImageIdentifier()
 
-        print("Inicio da batalha")
-        time.sleep(2)
-
-        print("clique de controle de tela")
-        cm.click_with_variation((280, 500), 100, 150)
+        print("Inicio da partida")
         time.sleep(2)
 
         # Variáveis para encontrar o botão de inciar a partida
         image_path = "bot/screenshots/buttons/start_button.png"
         search_region = (236, 806, 85, 61)
-        click_location = (279, 839)
 
-        cm.click_if_image_found_with_variation(
-            image_path, click_location, search_region, 50, 50)
-
-        time.sleep(0.5)
+        count = 0
+        while count < 6:
+            if im.is_image_on_screen(image_path, search_region):
+                click_location = (279, 839)
+                cm.click_with_variation(click_location, 50, 50)
+                print("Batalha iniciada")
+                time.sleep(1)
+                break
+            else:
+                print("clique aleatorio na tela")
+                cm.click_with_variation((280, 500), 100, 150)
+                time.sleep(2)
+                count += 1
 
     # Seleciona minions aleatoriamente e os coloca perto da torre até a partida acabar
     def defend_tower(self):
