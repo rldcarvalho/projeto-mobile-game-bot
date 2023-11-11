@@ -2,10 +2,10 @@ from utilities.window_handler import window_handler
 import time
 
 
-class StartLdplayer:
-    def ajust_window():
+class StartEmulator:
+    def ajust_window(name):
         # inicia a classe de focar janela
-        wh_ldp = window_handler("LDPlayer")
+        wh_ldp = window_handler(name)
 
         # foca a janela
         wh_ldp.focus_window()
