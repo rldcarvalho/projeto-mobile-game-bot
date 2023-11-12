@@ -11,6 +11,7 @@ class CollectRewards:
 
     def after_mission(self):
         count = 0
+        print("partida finalizada")
         if self.is_winner():
             print("Vencedor. Continuando")
             self.winner_mission_continue()
@@ -64,6 +65,10 @@ class CollectRewards:
 
         cm.click_if_image_found_with_variation(
             image_path, click_location, screen_region, 30, 15)
+        time.sleep(3)
+
+        # clica no icone do mapa para previnir cartas q uparam
+        cm.click_with_variation((282, 971), 20, 20)
         time.sleep(2)
 
     def is_defeated(self):
@@ -79,6 +84,13 @@ class CollectRewards:
         screen_region = (204, 966, 152, 34)
 
         return im.is_image_on_screen(image_path, screen_region)
+
+    # verificar se upou depois de pegar cada reward delai 1s antes, clicar qlquer lugar se sim
+    # def lvl_up():
+    #     path = "bot/screenshots/lvl_up.png"
+    #     region = (80, 274, 118, 53)
+    #     im = ImageIdentifier()
+    #     print(str(im.is_image_on_screen(path, region)))
 
     # def collect_chest(self):
     #     cm = ClickManager()
