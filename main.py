@@ -15,7 +15,7 @@ emulator_monitor = EmulatorMonitor(icon_path, monitor_region)
 emulator_monitor.start_monitoring()
 
 StartEmulator.ajust_window("LDPlayer")
-while True:
+while not emulator_monitor.is_emulator_stuck():
     sgm.mission()
     battle.start()
     battle.defend_tower()

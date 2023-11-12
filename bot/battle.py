@@ -20,7 +20,7 @@ class Battle:
         search_region = (236, 806, 85, 61)
 
         count = 0
-        while count < 6:
+        while count < 3:
             if im.is_image_on_screen(image_path, search_region):
                 click_location = (279, 839)
                 cm.click_with_variation(click_location, 50, 50)
@@ -29,8 +29,8 @@ class Battle:
                 break
             else:
                 print("clique aleatorio na tela")
-                cm.click_with_variation((280, 500), 100, 150)
-                time.sleep(2)
+                cm.click_with_variation((280, 650), 100, 100)
+                time.sleep(6)
                 count += 1
 
     # Seleciona minions aleatoriamente e os coloca perto da torre até a partida acabar
@@ -43,8 +43,8 @@ class Battle:
                 time.sleep(1)
             else:
                 count += 1
-                print(count)
                 time.sleep(2)
+        print("Fim da batalha, parando de soltar minions")
 
     # Verifica se está com pelo menos 4 de mana
     def have_mana(self):

@@ -10,21 +10,24 @@ class CollectRewards:
         pass
 
     def after_mission(self):
+        print("Coletando recompensas")
         count = 0
-        print("partida finalizada")
-        if self.is_winner():
-            print("Vencedor. Continuando")
-            self.winner_mission_continue()
-        elif self.is_defeated():
-            print("Perdedor. Continuando")
-            self.return_to_map()
-        else:
-            if count > 5:
-                print("Recompensa não encontrada. Encerrando")
-                os._exit(0)
+        while count <= 6:
+            if self.is_winner():
+                print("Vencedor. Continuando")
+                self.winner_mission_continue()
+                break
+            elif self.is_defeated():
+                print("Perdedor. Continuando")
+                self.return_to_map()
+                break
+            else:
+                if count > 5:
+                    print("Recompensa não encontrada. Encerrando")
+                    os._exit(0)
 
-            count += 1
-            time.sleep(2)
+                count += 1
+                time.sleep(2)
 
     def return_to_map(self):
         cm = ClickManager()
@@ -33,11 +36,11 @@ class CollectRewards:
         while self.is_defeated():
             cm.click_with_variation(click_location, 50, 15)
             print("retornar ao mapa")
-            time.sleep(1)
+            time.sleep(3)
 
         print("Inicio do loading")
         LoadingScreen.wait()
-        time.sleep(2)
+        time.sleep(3)
 
     def winner_mission_continue(self):
         cm = ClickManager()
@@ -48,7 +51,7 @@ class CollectRewards:
         while self.is_winner():
             cm.click_with_variation(click_location, 50, 15)
             print("retornando ao mapa para coletar recompensa")
-            time.sleep(1)
+            time.sleep(3)
 
         print("Inicio do loading")
         LoadingScreen.wait()
@@ -69,7 +72,7 @@ class CollectRewards:
 
         # clica no icone do mapa para previnir cartas q uparam
         cm.click_with_variation((282, 971), 20, 20)
-        time.sleep(2)
+        time.sleep(3)
 
     def is_defeated(self):
         im = ImageIdentifier()

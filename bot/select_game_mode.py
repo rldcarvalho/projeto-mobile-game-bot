@@ -1,3 +1,4 @@
+import os
 import random
 from bot.loading_screen import LoadingScreen
 from utilities.click_manager import ClickManager
@@ -15,8 +16,11 @@ class SelectGameMode:
 
         # clica no botão de missão se já não estiver na tela
         self.go_to_mission_screen()
-
         time.sleep(1)
+
+        # verifica se está na tela de missoes
+        if not self.is_in_mission_screen():
+            os._exit(0)
 
         # inicia uma missão aleatória
         self.select_mission()
@@ -61,19 +65,21 @@ class SelectGameMode:
 
     def go_to_mission_screen(self):
         cm = ClickManager()
-        im = ImageIdentifier()
-
-        # Variáveis para encontrar o botão de mapa
-        image_path = "bot/screenshots/screens/mission_screen.png"
-        search_region = (239, 85, 75, 95)
 
         # Verifica se está na tela de missoes, se não, vai para ela
-        if (not im.is_image_on_screen(image_path, search_region)):
+        if (not self.is_in_mission_screen()):
             click_location = (151, 863)
             cm.click_with_variation(click_location, 70, 15)
             print("Entrando na tela de missões")
 
             time.sleep(1)
+
+    def is_in_mission_screen(self):
+        im = ImageIdentifier()
+        image_path = "bot/screenshots/screens/mission_screen.png"
+        search_region = (239, 85, 75, 95)
+
+        return im.is_image_on_screen(image_path, search_region)
 
     def select_mission(self):
         # Variáveis do clique e zonas dos botões de opções de missão

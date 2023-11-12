@@ -23,6 +23,7 @@ class EmulatorMonitor:
                 # implementar código de reiniciar o jogo
                 break
 
+            print(".")
             time.sleep(3)  # Ajuste de intervalo do scan da imagem
 
     def start_monitoring(self):
