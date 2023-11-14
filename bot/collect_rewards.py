@@ -27,7 +27,7 @@ class CollectRewards:
                     os._exit(0)
 
                 count += 1
-                time.sleep(2)
+                time.sleep(3)
 
     def return_to_map(self):
         cm = ClickManager()

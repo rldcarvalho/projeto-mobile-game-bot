@@ -10,10 +10,11 @@ class EmulatorMonitor:
         self.icon_path = icon_path
         self.region = region
         self.stopped = False
+        self.monitor_thread = None
 
     def is_emulator_stuck(self):
         im = ImageIdentifier()
-        return not im.is_image_on_screen(self.icon_path, self.region)
+        return im.is_image_on_screen(self.icon_path, self.region)
 
     def monitor_emulator(self):
         print("o emulador está sendo monitorado")
