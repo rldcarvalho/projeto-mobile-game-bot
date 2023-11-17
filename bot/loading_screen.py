@@ -10,6 +10,7 @@ class LoadingScreen:
         image_path = "bot/screenshots/screens/loading_screen.png"
         search_region = (257, 307, 45, 45)
 
+        print("Inicio do loading")
         count = 0
         while im.is_image_on_screen(image_path, search_region):
             count += 1

@@ -24,10 +24,8 @@ class SelectGameMode:
 
         # inicia uma missão aleatória
         self.select_mission()
-
         time.sleep(1)
 
-        print("Inicio do loading")
         LoadingScreen.wait()
 
     def pvp(self):
@@ -48,6 +46,61 @@ class SelectGameMode:
 
         # clica no botão para procurar partida
 
+    def pve(self):
+        cm = ClickManager()
+        im = ImageIdentifier()
+
+        # vai para o mapa central
+        self.center_map()
+
+        # abre um mapa do mundo
+        image_path = "bot/screenshots/buttons/map_button.png"
+        search_region = (137, 101, 48, 41)
+        if not im.is_image_on_screen(image_path, search_region):
+            print("Abrindo um mapa no mundo")
+            cm.click_with_variation((295, 454), 15, 20)
+            time.sleep(2)
+
+        # retrocece até chegar no primeiro mapa
+        self.return_to_first_map()
+
+        # clica para entrar na partida
+        self.select_pve_map()
+
+        # Tela de loading
+        LoadingScreen.wait()
+
+    def pve_loser(self, number):
+        cm = ClickManager()
+        im = ImageIdentifier()
+
+        locations = {
+            1: (307, 256),
+            2: (307, 377),
+            3: (307, 497),
+            4: (307, 618),
+            5: (307, 737),
+        }
+
+        click_location = locations.get(number, (0, 0))
+
+        image_path = "bot/screenshots/screens/pve_screen.png"
+        search_region = (137, 101, 48, 41)
+        if im.is_image_on_screen(image_path, search_region):
+            print(f"Abrindo o mapa numero {number}")
+            cm.click_with_variation(click_location, 70, 15)
+            time.sleep(1)
+
+            print("iniciando a missão PVE")
+            cm.click_with_variation((393, 919), 30, 15)
+            time.sleep(1.5)
+
+            # Tela de loading
+            LoadingScreen.wait()
+        else:
+            print("página de missão não encontrada. Bot finalizado")
+            os._exit(0)
+
     def center_map(self):
         cm = ClickManager()
         im = ImageIdentifier()
@@ -57,7 +110,8 @@ class SelectGameMode:
         search_region = (898, 988, 72, 29)
 
         # Verifica se está na tela de mapa, se não, vai para ela
-        if (not im.is_image_on_screen(image_path, search_region)):
+        if not im.is_image_on_screen(image_path, search_region):
+            print("Indo para o mapa central")
             click_location = (282, 970)
             cm.click_with_variation(click_location, 2, 15)
 
@@ -108,3 +162,31 @@ class SelectGameMode:
         extracted_text = im.extract_text_in_image(region)
 
         return text == extracted_text
+
+    def return_to_first_map(self):
+        cm = ClickManager()
+        im = ImageIdentifier()
+        image_path = "bot/screenshots/screens/pve_screen.png"
+        search_region = (137, 101, 48, 41)
+
+        if im.is_image_on_screen(image_path, search_region):
+            image_button_path = "bot/screenshots/buttons/return_arrow_button.png"
+            search_button_region = (48, 119, 54, 59)
+
+            print("retornando ao primeiro mapa")
+            while im.is_image_on_screen(image_button_path, search_button_region, 0.95):
+                cm.normal_click((75, 149), 0.15)
+                time.sleep(1)
+
+            print("Primeiro mapa encontrado")
+            time.sleep(1)
+
+    def select_pve_map(self):
+        cm = ClickManager()
+        print("Clicando na missão PVE")
+        cm.click_with_variation((297, 256), 70, 15)
+        time.sleep(1)
+
+        print("iniciando a missão PVE")
+        cm.click_with_variation((393, 919), 30, 15)
+        time.sleep(1.5)

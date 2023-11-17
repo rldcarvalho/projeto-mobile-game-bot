@@ -30,7 +30,7 @@ class Battle:
             else:
                 print("clique aleatorio na tela")
                 cm.click_with_variation((280, 650), 100, 100)
-                time.sleep(6)
+                time.sleep(3)
                 count += 1
 
     # Seleciona minions aleatoriamente e os coloca perto da torre até a partida acabar
@@ -45,6 +45,18 @@ class Battle:
                 count += 1
                 time.sleep(2)
         print("Fim da batalha, parando de soltar minions")
+
+    # Aguarda a partida acabar sem jogar minions
+    def dont_defend_tower(self):
+        count = 0
+        while count < 5:
+            if (self.have_mana()):
+                count = 0
+                time.sleep(2)
+            else:
+                count += 1
+                time.sleep(2)
+        print("Fim da batalha")
 
     # Verifica se está com pelo menos 4 de mana
     def have_mana(self):

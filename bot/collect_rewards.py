@@ -74,6 +74,20 @@ class CollectRewards:
         cm.click_with_variation((282, 971), 20, 20)
         time.sleep(3)
 
+    def try_again(self):
+        im = ImageIdentifier()
+        cm = ClickManager()
+        image_path = "bot/screenshots/buttons/try_again_button.png"
+        screen_region = (96, 967, 125, 33)
+
+        if self.is_defeated():
+            print("tentando novamente")
+            while im.is_image_on_screen(image_path, screen_region):
+                cm.click_with_variation((158, 985), 50, 15)
+                time.sleep(2)
+
+            LoadingScreen.wait()
+
     def is_defeated(self):
         im = ImageIdentifier()
         image_path = "bot/screenshots/buttons/try_again_button.png"
