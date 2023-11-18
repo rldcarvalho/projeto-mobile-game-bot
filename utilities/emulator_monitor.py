@@ -21,7 +21,7 @@ class EmulatorMonitor:
         while not self.stopped:
             if self.is_emulator_stuck():
                 print("Emulador travou. Parando o bot.")
-                # implementar código de reiniciar o jogo
+                #TODO implementar código de reiniciar o jogo
                 break
 
             print(".")

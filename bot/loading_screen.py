@@ -4,6 +4,7 @@ import time
 
 
 class LoadingScreen:
+    @staticmethod
     def wait():
         im = ImageIdentifier()
 
@@ -15,6 +16,5 @@ class LoadingScreen:
         while im.is_image_on_screen(image_path, search_region):
             count += 1
             if count >= 50:
-                print("Emulador travou")
-                os._exit(0)
+                raise TimeoutError("Tempo limite de espera atingido. Emulador pode ter travado.")
             time.sleep(1)

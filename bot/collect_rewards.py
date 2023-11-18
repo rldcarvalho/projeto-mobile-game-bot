@@ -23,9 +23,7 @@ class CollectRewards:
                 break
             else:
                 if count > 5:
-                    print("Recompensa não encontrada. Encerrando")
-                    os._exit(0)
-
+                    raise RuntimeError("Recompensa não encontrada.")
                 count += 1
                 time.sleep(3)
 

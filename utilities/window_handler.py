@@ -11,9 +11,9 @@ class window_handler:
         if len(windows) > 0:
             self.window = windows[0]
             self.window.activate()
-            print(f"Focused on {self.window_title} window.")
+            print(f"Focando na janela {self.window_title}.")
         else:
-            print(f"{self.window_title} window not found.")
+            print(f"A janela {self.window_title} não foi encontrada.")
 
     def position_window(self, x, y):
         if self.window is None:
@@ -23,9 +23,9 @@ class window_handler:
 
         if self.window:
             self.window.moveTo(x, y)
-            print(f"Positioned {self.window_title} window at ({x}, {y}).")
+            print(f"Posicionada a janela {self.window_title} nas coordenadas ({x}, {y}).")
         else:
-            print(f"{self.window_title} window not found.")
+            print(f"A janela {self.window_title} não foi encontrada.")
 
     def resize_window(self, width, height):
         if self.window is None:
@@ -35,6 +35,6 @@ class window_handler:
 
         if self.window:
             self.window.resizeTo(width, height)
-            print(f"Resized {self.window_title} window to {width}x{height}.")
+            print(f"Redimensionada a janela {self.window_title} para o formato {width}x{height}.")
         else:
-            print(f"{self.window_title} window not found.")
+            print(f"A janela {self.window_title} não foi encontrada.")

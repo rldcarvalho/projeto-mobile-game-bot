@@ -39,14 +39,12 @@ class ClickManager:
         ii = ImageIdentifier()
         if ii.is_image_on_screen(image_path, region=search_region):
             self.normal_click(click_location)
-            print(f"Clicked at {click_location} because the image was found.")
         else:
-            print("Image not found on the screen.")
+            print("Imagem não encontrada na tela")
 
     def click_if_image_found_with_variation(self, image_path, click_location, search_region=None, x_variation=10, y_variation=10):
         ii = ImageIdentifier()
         if ii.is_image_on_screen(image_path, search_region):
             self.click_with_variation(click_location, x_variation, y_variation)
-            print(f"Clicked at {click_location} because the image was found.")
         else:
-            print("Image not found on the screen.")
+            print("Imagem não encontrada na tela")
