@@ -1,6 +1,5 @@
 from utilities.image_identifier import ImageIdentifier
-import os
-import time
+from utilities.custom_timer import CustomTimer
 
 
 class LoadingScreen:
@@ -17,7 +16,7 @@ class LoadingScreen:
             count += 1
             if count >= 50:
                 raise TimeoutError("Tempo limite de espera atingido. Emulador pode ter travado.")
-            time.sleep(1)
+            CustomTimer.sleep(1)
 
     @staticmethod
     def searching_opponent():
@@ -32,6 +31,6 @@ class LoadingScreen:
             count += 1
             if count >= 20:
                 raise TimeoutError("Tempo limite de espera atingido. Emulador pode ter travado.")
-            time.sleep(1)
+            CustomTimer.sleep(1)
 
-        time.sleep(1)
+        CustomTimer.sleep(1)

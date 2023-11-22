@@ -1,4 +1,4 @@
-import time
+from utilities.custom_timer import CustomTimer
 from utilities.click_manager import ClickManager
 from utilities.image_identifier import ImageIdentifier
 
@@ -13,7 +13,7 @@ class Battle:
         im = ImageIdentifier()
 
         print("Inicio da partida")
-        time.sleep(2)
+        CustomTimer.sleep(2)
 
         # Variáveis para encontrar o botão de inciar a partida
         image_path = "bot/screenshots/buttons/start_button.png"
@@ -25,12 +25,12 @@ class Battle:
                 click_location = (279, 839)
                 cm.click_with_variation(click_location, 50, 50)
                 print("Batalha iniciada")
-                time.sleep(1)
+                CustomTimer.sleep(1, 0.5)
                 break
             else:
                 print("clique aleatorio na tela")
                 cm.click_with_variation((280, 650), 100, 100)
-                time.sleep(3)
+                CustomTimer.sleep(3, 0.5)
                 count += 1
 
     # Seleciona minions aleatoriamente e os coloca perto da torre até a partida acabar
@@ -42,10 +42,10 @@ class Battle:
             if self.have_mana():
                 self.play_minion()
                 count = 0
-                time.sleep(1)
+                CustomTimer.sleep(1, 0.5)
             else:
                 count += 1
-                time.sleep(2)
+                CustomTimer.sleep(2, 0.5)
         print("Fim da batalha, parando de soltar minions")
 
     # Aguarda a partida acabar sem jogar minions
@@ -54,10 +54,10 @@ class Battle:
         while count < 5:
             if self.have_mana():
                 count = 0
-                time.sleep(2)
+                CustomTimer.sleep(2)
             else:
                 count += 1
-                time.sleep(2)
+                CustomTimer.sleep(2)
         print("Fim da batalha")
 
     # Verifica se está com pelo menos 4 de mana
@@ -77,6 +77,6 @@ class Battle:
         base_tower = (278, 670)
 
         cm.click_with_variation(minion_region_center, 200, 50)
-        time.sleep(0.5)
+        CustomTimer.sleep(0.5, 0.5)
         cm.click_with_variation(base_tower, 100, 50)
-        time.sleep(0.5)
+        CustomTimer.sleep(0.5, 0.5)

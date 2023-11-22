@@ -1,7 +1,7 @@
 from utilities.image_identifier import ImageIdentifier
 import pyautogui
 import random
-import time
+from utilities.custom_timer import CustomTimer
 
 
 class ClickManager:
@@ -17,7 +17,7 @@ class ClickManager:
     def long_click(self, coordinates, duration=1):
         x, y = coordinates
         pyautogui.mouseDown(x, y)
-        time.sleep(duration)
+        CustomTimer.sleep(duration)
         pyautogui.mouseUp(x, y)
 
     def drag_and_drop(self, start_coordinates, end_coordinates, duration=1):
@@ -25,7 +25,7 @@ class ClickManager:
         end_x, end_y = end_coordinates
 
         pyautogui.mouseDown(start_x, start_y)
-        time.sleep(duration)
+        CustomTimer.sleep(duration)
         pyautogui.moveTo(end_x, end_y)
         pyautogui.mouseUp()
 

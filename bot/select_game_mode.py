@@ -3,7 +3,7 @@ import random
 from bot.loading_screen import LoadingScreen
 from utilities.click_manager import ClickManager
 from utilities.image_identifier import ImageIdentifier
-import time
+from utilities.custom_timer import CustomTimer
 
 
 class SelectGameMode:
@@ -16,7 +16,7 @@ class SelectGameMode:
 
         # clica no botão de missão se já não estiver na tela
         self.go_to_mission_screen()
-        time.sleep(1)
+        CustomTimer.sleep(1, 0.5)
 
         # verifica se está na tela de missoes
         if not self.is_in_mission_screen():
@@ -24,7 +24,7 @@ class SelectGameMode:
 
         # inicia uma missão aleatória
         self.select_mission()
-        time.sleep(1)
+        CustomTimer.sleep(1, 0.5)
 
         LoadingScreen.wait()
 
@@ -35,12 +35,12 @@ class SelectGameMode:
             self.center_map()
             self.go_to_pvp_screen()
 
-        time.sleep(1)
+        CustomTimer.sleep(1, 1)
 
         # clica no botão para procurar partida
         cm.click_with_variation((410, 950), 50, 15)
 
-        time.sleep(1)
+        CustomTimer.sleep(1)
 
         LoadingScreen.searching_opponent()
 
@@ -59,7 +59,7 @@ class SelectGameMode:
         if not im.is_image_on_screen(image_path, search_region):
             print("Abrindo um mapa no mundo")
             cm.click_with_variation((295, 454), 15, 20)
-            time.sleep(2)
+            CustomTimer.sleep(2, 1)
 
         # retrocece até chegar no primeiro mapa
         self.return_to_first_map()
@@ -70,7 +70,8 @@ class SelectGameMode:
         # Tela de loading
         LoadingScreen.wait()
 
-    def pve_loser(self, number):
+    @staticmethod
+    def pve_loser(number):
         cm = ClickManager()
         im = ImageIdentifier()
 
@@ -89,11 +90,11 @@ class SelectGameMode:
         if im.is_image_on_screen(image_path, search_region):
             print(f"Abrindo o mapa numero {number}")
             cm.click_with_variation(click_location, 70, 15)
-            time.sleep(1)
+            CustomTimer.sleep(1, 1)
 
             print("iniciando a missão PVE")
             cm.click_with_variation((393, 919), 30, 15)
-            time.sleep(1.5)
+            CustomTimer.sleep(1.5)
 
             # Tela de loading
             LoadingScreen.wait()
@@ -101,7 +102,8 @@ class SelectGameMode:
             print("página de missão não encontrada. Bot finalizado")
             os._exit(0)
 
-    def center_map(self):
+    @staticmethod
+    def center_map():
         cm = ClickManager()
         im = ImageIdentifier()
 
@@ -115,7 +117,7 @@ class SelectGameMode:
             click_location = (282, 970)
             cm.click_with_variation(click_location, 2, 15)
 
-            time.sleep(1)
+            CustomTimer.sleep(1, 2)
 
     def go_to_mission_screen(self):
         cm = ClickManager()
@@ -126,9 +128,10 @@ class SelectGameMode:
             cm.click_with_variation(click_location, 70, 15)
             print("Entrando na tela de missões")
 
-            time.sleep(1)
+            CustomTimer.sleep(1, 2)
 
-    def is_in_mission_screen(self):
+    @staticmethod
+    def is_in_mission_screen():
         im = ImageIdentifier()
         image_path = "bot/screenshots/screens/mission_screen.png"
         search_region = (239, 85, 75, 95)
@@ -144,9 +147,10 @@ class SelectGameMode:
             cm.click_with_variation(click_location, 50, 15)
             print("Entrando na tela de pvp")
 
-            time.sleep(1)
+            CustomTimer.sleep(1, 2)
 
-    def is_in_pvp_screen(self):
+    @staticmethod
+    def is_in_pvp_screen():
         im = ImageIdentifier()
         image_path = "bot/screenshots/screens/pvp_screen.png"
         search_region = (254, 119, 57, 58)
@@ -175,13 +179,15 @@ class SelectGameMode:
                 print("Missão selecionada")
                 break
 
-    def is_bad_mission(self, text, region):
+    @staticmethod
+    def is_bad_mission(text, region):
         im = ImageIdentifier()
         extracted_text = im.extract_text_in_image(region)
 
         return text == extracted_text
 
-    def return_to_first_map(self):
+    @staticmethod
+    def return_to_first_map():
         cm = ClickManager()
         im = ImageIdentifier()
         image_path = "bot/screenshots/screens/pve_screen.png"
@@ -194,17 +200,18 @@ class SelectGameMode:
             print("retornando ao primeiro mapa")
             while im.is_image_on_screen(image_button_path, search_button_region, 0.95):
                 cm.normal_click((75, 149), 0.15)
-                time.sleep(1)
+                CustomTimer.sleep(1, 1)
 
             print("Primeiro mapa encontrado")
-            time.sleep(1)
+            CustomTimer.sleep(1, 1)
 
-    def select_pve_map(self):
+    @staticmethod
+    def select_pve_map():
         cm = ClickManager()
         print("Clicando na missão PVE")
         cm.click_with_variation((297, 256), 70, 15)
-        time.sleep(1)
+        CustomTimer.sleep(1, 1)
 
         print("iniciando a missão PVE")
         cm.click_with_variation((393, 919), 30, 15)
-        time.sleep(1.5)
+        CustomTimer.sleep(1, 2)

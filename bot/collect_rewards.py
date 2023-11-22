@@ -1,5 +1,4 @@
-import os
-import time
+from utilities.custom_timer import CustomTimer
 from bot.loading_screen import LoadingScreen
 from utilities.click_manager import ClickManager
 from utilities.image_identifier import ImageIdentifier
@@ -25,7 +24,7 @@ class CollectRewards:
                 if count > 5:
                     raise RuntimeError("Recompensa não encontrada.")
                 count += 1
-                time.sleep(3)
+                CustomTimer.sleep(3, 1)
 
     def after_pvp(self):
         cm = ClickManager()
@@ -38,14 +37,13 @@ class CollectRewards:
             cm.click_with_variation(click_location, 50, 15)
             print("retornando a tela de pvp")
             count += 1
-            time.sleep(5)
+            CustomTimer.sleep(5, 1)
 
         if count > 5:
             raise RuntimeError("Emulador travou")
 
         LoadingScreen.wait()
-        time.sleep(2)
-
+        CustomTimer.sleep(2, 1)
 
     def return_to_map(self):
         cm = ClickManager()
@@ -54,10 +52,10 @@ class CollectRewards:
         while self.is_defeated():
             cm.click_with_variation(click_location, 50, 15)
             print("retornar ao mapa")
-            time.sleep(3)
+            CustomTimer.sleep(3, 1)
 
         LoadingScreen.wait()
-        time.sleep(3)
+        CustomTimer.sleep(3, 1)
 
     def winner_mission_continue(self):
         cm = ClickManager()
@@ -68,15 +66,16 @@ class CollectRewards:
         while self.is_winner():
             cm.click_with_variation(click_location, 50, 15)
             print("retornando ao mapa para coletar recompensa")
-            time.sleep(3)
+            CustomTimer.sleep(3, 1)
 
         print("Inicio do loading")
         LoadingScreen.wait()
 
-        time.sleep(3)
+        CustomTimer.sleep(3, 1)
         self.collect_mission_reward()
 
-    def collect_mission_reward(self):
+    @staticmethod
+    def collect_mission_reward():
         cm = ClickManager()
 
         image_path = "bot/screenshots/buttons/get_mission_reward_button.png"
@@ -85,11 +84,11 @@ class CollectRewards:
 
         cm.click_if_image_found_with_variation(
             image_path, click_location, screen_region, 30, 15)
-        time.sleep(3)
+        CustomTimer.sleep(3, 1)
 
         # clica no icone do mapa para previnir cartas q uparam
         cm.click_with_variation((282, 971), 20, 20)
-        time.sleep(3)
+        CustomTimer.sleep(3, 1)
 
     def try_again(self):
         im = ImageIdentifier()
@@ -101,30 +100,25 @@ class CollectRewards:
             print("tentando novamente")
             while im.is_image_on_screen(image_path, screen_region):
                 cm.click_with_variation((158, 985), 50, 15)
-                time.sleep(2)
+                CustomTimer.sleep(2, 0.5)
 
             LoadingScreen.wait()
 
-    def is_defeated(self):
+    @staticmethod
+    def is_defeated():
         im = ImageIdentifier()
         image_path = "bot/screenshots/buttons/try_again_button.png"
         screen_region = (96, 967, 125, 33)
 
         return im.is_image_on_screen(image_path, screen_region)
 
-    def is_winner(self):
+    @staticmethod
+    def is_winner():
         im = ImageIdentifier()
         image_path = "bot/screenshots/buttons/win_continue_button.png"
         screen_region = (204, 966, 152, 34)
 
         return im.is_image_on_screen(image_path, screen_region)
-
-    # verificar se upou depois de pegar cada reward delai 1s antes, clicar qlquer lugar se sim
-    # def lvl_up():
-    #     path = "bot/screenshots/lvl_up.png"
-    #     region = (80, 274, 118, 53)
-    #     im = ImageIdentifier()
-    #     print(str(im.is_image_on_screen(path, region)))
 
     # def collect_chest(self):
     #     cm = ClickManager()
