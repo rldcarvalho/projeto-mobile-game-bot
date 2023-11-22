@@ -31,20 +31,20 @@ class SelectGameMode:
     def pvp(self):
         cm = ClickManager()
 
-        self.center_map()
-
-        # Variáveis para encontrar e clicar no botão de JxJ
-        image_path = "bot/screenshots/buttons/pvp_button.png"
-        search_region = (320, 817, 176, 82)
-        click_location = (422, 863)
-
-        # Verifica se a imagem está na tela e clica se encontrada na região especificado
-        cm.click_if_image_found_with_variation(
-            image_path, click_location, search_region, 50, 15)
+        if not self.is_in_pvp_screen():
+            self.center_map()
+            self.go_to_pvp_screen()
 
         time.sleep(1)
 
         # clica no botão para procurar partida
+        cm.click_with_variation((410, 950), 50, 15)
+
+        time.sleep(1)
+
+        LoadingScreen.searching_opponent()
+
+        LoadingScreen.wait()
 
     def pve(self):
         cm = ClickManager()
@@ -121,7 +121,7 @@ class SelectGameMode:
         cm = ClickManager()
 
         # Verifica se está na tela de missoes, se não, vai para ela
-        if (not self.is_in_mission_screen()):
+        if not self.is_in_mission_screen():
             click_location = (151, 863)
             cm.click_with_variation(click_location, 70, 15)
             print("Entrando na tela de missões")
@@ -132,6 +132,24 @@ class SelectGameMode:
         im = ImageIdentifier()
         image_path = "bot/screenshots/screens/mission_screen.png"
         search_region = (239, 85, 75, 95)
+
+        return im.is_image_on_screen(image_path, search_region)
+
+    def go_to_pvp_screen(self):
+        cm = ClickManager()
+
+        # Verifica se está na tela de pvp, se não, vai para ela
+        if not self.is_in_pvp_screen():
+            click_location = (422, 863)
+            cm.click_with_variation(click_location, 50, 15)
+            print("Entrando na tela de pvp")
+
+            time.sleep(1)
+
+    def is_in_pvp_screen(self):
+        im = ImageIdentifier()
+        image_path = "bot/screenshots/screens/pvp_screen.png"
+        search_region = (254, 119, 57, 58)
 
         return im.is_image_on_screen(image_path, search_region)
 

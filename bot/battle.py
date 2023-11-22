@@ -8,7 +8,7 @@ class Battle:
         pass
 
     # Realiza o procedimento para iniciar partida PVE
-    def start(self):
+    def start_pve(self):
         cm = ClickManager()
         im = ImageIdentifier()
 
@@ -35,9 +35,11 @@ class Battle:
 
     # Seleciona minions aleatoriamente e os coloca perto da torre até a partida acabar
     def defend_tower(self):
+        print("Começando a soltar os minions")
+
         count = 0
         while count < 6:
-            if (self.have_mana()):
+            if self.have_mana():
                 self.play_minion()
                 count = 0
                 time.sleep(1)
@@ -50,7 +52,7 @@ class Battle:
     def dont_defend_tower(self):
         count = 0
         while count < 5:
-            if (self.have_mana()):
+            if self.have_mana():
                 count = 0
                 time.sleep(2)
             else:

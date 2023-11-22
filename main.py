@@ -37,7 +37,7 @@ emulator_monitor.start_monitoring()
 
 while not emulator_monitor.is_emulator_stuck():
     sgm.mission()
-    battle.start()
+    battle.start_pve()
     battle.defend_tower()
     cr.after_mission()
 

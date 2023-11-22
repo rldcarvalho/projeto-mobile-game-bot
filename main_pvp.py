@@ -35,12 +35,15 @@ StartEmulator.ajust_window(emulator_name)
 emulator_monitor = EmulatorMonitor(icon_path, monitor_region)
 emulator_monitor.start_monitoring()
 
-# Seleciona a missão da tela para fazer. Entre com a posição de 1 a 5:
-sgm.pve_loser(3)
+# sgm.pvp()
+# time.sleep(3)
+# battle.defend_tower()
+# cr.after_pvp()
 
 while not emulator_monitor.is_emulator_stuck():
-    battle.start_pve()
-    battle.dont_defend_tower()
-    cr.try_again()
+    sgm.pvp()
+    time.sleep(3)
+    battle.defend_tower()
+    cr.after_pvp()
 
 emulator_monitor.stop_monitoring()

@@ -27,6 +27,26 @@ class CollectRewards:
                 count += 1
                 time.sleep(3)
 
+    def after_pvp(self):
+        cm = ClickManager()
+
+        print("coletando XP")
+        click_location = (284, 981)
+
+        count = 0
+        while count <= 6 and self.is_winner():
+            cm.click_with_variation(click_location, 50, 15)
+            print("retornando a tela de pvp")
+            count += 1
+            time.sleep(5)
+
+        if count > 5:
+            raise RuntimeError("Emulador travou")
+
+        LoadingScreen.wait()
+        time.sleep(2)
+
+
     def return_to_map(self):
         cm = ClickManager()
         click_location = (400, 986)
@@ -36,7 +56,6 @@ class CollectRewards:
             print("retornar ao mapa")
             time.sleep(3)
 
-        print("Inicio do loading")
         LoadingScreen.wait()
         time.sleep(3)
 
