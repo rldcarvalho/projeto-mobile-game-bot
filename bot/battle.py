@@ -29,7 +29,7 @@ class Battle:
                 break
             else:
                 print("clique aleatorio na tela")
-                cm.click_with_variation((280, 650), 100, 100)
+                cm.click_with_variation((273, 1006), 100, 10)
                 CustomTimer.sleep(3, 0.5)
                 count += 1
 
