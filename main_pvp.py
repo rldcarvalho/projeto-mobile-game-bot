@@ -11,7 +11,7 @@ battle = Battle()
 cr = CollectRewards()
 
 # nome do emulador utilizado
-emulator_name = "BluestacksMain"
+emulator_name = "MuMuMain"
 
 # Mapeamento de configurações para cada emulador
 emulator_settings = {
@@ -20,6 +20,10 @@ emulator_settings = {
         "monitor_region": (593, 231, 59, 51),
     },
     "BluestacksMain": {
+        "icon_path": "bot/screenshots/screens/game_icon_bluestacks.png",
+        "monitor_region": (410, 190, 52, 47),
+    },
+    "MuMuMain": {
         "icon_path": "bot/screenshots/screens/game_icon_bluestacks.png",
         "monitor_region": (410, 190, 52, 47),
     }
@@ -34,11 +38,6 @@ monitor_region = settings.get("monitor_region", (0, 0, 0, 0))
 StartEmulator.ajust_window(emulator_name)
 emulator_monitor = EmulatorMonitor(icon_path, monitor_region)
 emulator_monitor.start_monitoring()
-
-# sgm.pvp()
-# time.sleep(3)
-# battle.defend_tower()
-# cr.after_pvp()
 
 while not emulator_monitor.is_emulator_stuck():
     sgm.pvp()

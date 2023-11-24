@@ -23,4 +23,11 @@ class StartEmulator:
         CustomTimer.sleep(0.5)
 
         # Ajusta tamanho da tela
-        wh_emulator.resize_window(602, 1030)
+        width = 602
+        height = 1030
+
+        if name == "MuMuMain":
+            width = 567
+            height = 1035
+
+        wh_emulator.resize_window(width, height)

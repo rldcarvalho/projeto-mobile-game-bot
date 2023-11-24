@@ -11,7 +11,7 @@ battle = Battle()
 cr = CollectRewards()
 
 # nome do emulador utilizado
-emulator_name = "BluestacksMain"
+emulator_name = "MuMuMain"
 
 # Mapeamento de configurações para cada emulador
 emulator_settings = {
@@ -20,6 +20,10 @@ emulator_settings = {
         "monitor_region": (593, 231, 59, 51),
     },
     "BluestacksMain": {
+        "icon_path": "bot/screenshots/screens/game_icon_bluestacks.png",
+        "monitor_region": (410, 190, 52, 47),
+    },
+    "MuMuMain": {
         "icon_path": "bot/screenshots/screens/game_icon_bluestacks.png",
         "monitor_region": (410, 190, 52, 47),
     }
