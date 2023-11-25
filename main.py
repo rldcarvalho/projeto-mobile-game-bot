@@ -4,7 +4,7 @@ from bot.bot_manager import GameBotManager
 emulator_name = "MuMuMain"
 
 # nome do modo de jogo
-game_mode = "mission"
+game_mode = "pve"
 
 game = GameBotManager(emulator_name, game_mode)
 

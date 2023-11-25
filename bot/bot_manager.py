@@ -25,7 +25,7 @@ class GameBotManager:
 
         # Verifica se o modo de jogo é válido
         if self.game_mode in game_modes:
-            # Executa um loop while True contendo a função correspondente
+            # Executa um loop contendo a função correspondente
             while True:
                 game_modes[self.game_mode]()
         else:
@@ -38,6 +38,7 @@ class GameBotManager:
         self.cr.after_pvp()
 
     def pve(self):
+        self.sgm.pve_loser(3)
         self.battle.start_pve()
         self.battle.dont_defend_tower()
         self.cr.try_again()

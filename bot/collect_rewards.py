@@ -98,7 +98,7 @@ class CollectRewards:
             print("tentando novamente")
             while im.is_image_on_screen(image_path, screen_region):
                 cm.click_with_variation((158, 985), 50, 15)
-                CustomTimer.sleep(2, 0.5)
+                CustomTimer.sleep(3, 1)
 
             LoadingScreen.wait()
 

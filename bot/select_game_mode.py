@@ -98,9 +98,6 @@ class SelectGameMode:
 
             # Tela de loading
             LoadingScreen.wait()
-        else:
-            print("página de missão não encontrada. Bot finalizado")
-            os._exit(0)
 
     @staticmethod
     def center_map():
