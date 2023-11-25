@@ -46,5 +46,3 @@ class ClickManager:
         ii = ImageIdentifier()
         if ii.is_image_on_screen(image_path, search_region):
             self.click_with_variation(click_location, x_variation, y_variation)
-        else:
-            print("Imagem não encontrada na tela")

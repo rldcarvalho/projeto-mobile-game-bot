@@ -60,7 +60,6 @@ class CollectRewards:
     def winner_mission_continue(self):
         cm = ClickManager()
 
-        print("continuando")
         click_location = (284, 981)
 
         while self.is_winner():
@@ -68,7 +67,6 @@ class CollectRewards:
             print("retornando ao mapa para coletar recompensa")
             CustomTimer.sleep(3, 1)
 
-        print("Inicio do loading")
         LoadingScreen.wait()
 
         CustomTimer.sleep(3, 1)
