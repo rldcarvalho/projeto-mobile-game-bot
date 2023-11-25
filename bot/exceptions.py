@@ -1,0 +1,4 @@
+
+
+class RestartLoopException(Exception):
+    pass

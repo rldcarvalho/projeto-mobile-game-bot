@@ -1,3 +1,4 @@
+from bot.game_restarter import GameRestarter
 from utilities.custom_timer import CustomTimer
 from bot.loading_screen import LoadingScreen
 from utilities.click_manager import ClickManager
@@ -101,6 +102,8 @@ class CollectRewards:
                 CustomTimer.sleep(3, 1)
 
             LoadingScreen.wait()
+        else:
+            GameRestarter.check_and_handle_error()
 
     @staticmethod
     def is_defeated():

@@ -1,6 +1,7 @@
 import os
 from bot.battle import Battle
 from bot.collect_rewards import CollectRewards
+from bot.exceptions import RestartLoopException
 from bot.select_game_mode import SelectGameMode
 from bot.start_emulator import StartEmulator
 from utilities.custom_timer import CustomTimer
@@ -33,7 +34,10 @@ class GameBotManager:
         if self.game_mode in game_modes:
             # Executa um loop contendo a função correspondente
             while self.interrupter.is_running:
-                game_modes[self.game_mode]()
+                try:
+                    game_modes[self.game_mode]()
+                except RestartLoopException:
+                    continue
         else:
             print(f'Modo de jogo inválido: {self.game_mode}')
 

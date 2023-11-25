@@ -1,3 +1,4 @@
+from bot.game_restarter import GameRestarter
 from utilities.custom_timer import CustomTimer
 from utilities.click_manager import ClickManager
 from utilities.image_identifier import ImageIdentifier
@@ -33,6 +34,9 @@ class Battle:
                 CustomTimer.sleep(3, 0.5)
                 count += 1
 
+        if count >= 3:
+            GameRestarter.check_and_handle_error()
+
     # Seleciona minions aleatoriamente e os coloca perto da torre até a partida acabar
     def defend_tower(self):
         print("Começando a soltar os minions")
@@ -48,6 +52,8 @@ class Battle:
                 CustomTimer.sleep(2, 0.5)
         print("Fim da batalha, parando de soltar minions")
 
+        GameRestarter.check_and_handle_error()
+
     # Aguarda a partida acabar sem jogar minions
     def dont_defend_tower(self):
         count = 0
@@ -59,6 +65,8 @@ class Battle:
                 count += 1
                 CustomTimer.sleep(2)
         print("Fim da batalha")
+
+        GameRestarter.check_and_handle_error()
 
     # Verifica se está com pelo menos 4 de mana
     def have_mana(self):
