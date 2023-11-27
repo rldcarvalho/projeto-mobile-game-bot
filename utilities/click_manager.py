@@ -12,6 +12,7 @@ class ClickManager:
 
     def normal_click(self, coordinates, duration=0.1):
         x, y = coordinates
+        pyautogui.moveTo(x, y)
         pyautogui.click(x, y, duration=duration)
 
     def long_click(self, coordinates, duration=1):

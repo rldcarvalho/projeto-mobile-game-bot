@@ -42,3 +42,34 @@ class ImageIdentifier:
         text = pytesseract.image_to_string(screen, lang="por")
 
         return ' '.join(text.split())
+
+    @staticmethod
+    def find_image_on_screen(image_path, region=None, confidence=0.8):
+        """
+        Encontra a posição de uma imagem na tela.
+
+        Parameters:
+            - image_path (str): O caminho para a imagem PNG.
+            - region (tuple): A região da tela onde a imagem será procurada.
+                              Deve ser uma tupla no formato (x, y, largura, altura).
+                              Se for None, a tela inteira será considerada.
+            - confidence (float): A confiança mínima para considerar uma correspondência.
+                                 Deve estar entre 0 e 1. Quanto maior, mais confiante.
+
+        Returns:
+            - tuple or None: As coordenadas (x, y) da imagem se encontrada, ou None se não encontrada.
+        """
+        try:
+            # Encontra a posição da imagem na tela
+            location = pyautogui.locateOnScreen(image_path, region=region, confidence=confidence)
+
+            # Retorna o centro da imagem se encontrada
+            if location:
+                x_center = location.left + location.width / 2
+                y_center = location.top + location.height / 2
+                return int(x_center), int(y_center)
+            else:
+                return None
+        except Exception as e:
+            print(f"Erro ao encontrar imagem: {e}")
+            return None

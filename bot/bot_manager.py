@@ -1,7 +1,7 @@
-import os
 from bot.battle import Battle
 from bot.collect_rewards import CollectRewards
-from bot.exceptions import RestartLoopException
+from bot.exceptions import RestartLoopException, LoadingStuckException
+from bot.game_restarter import GameRestarter
 from bot.select_game_mode import SelectGameMode
 from bot.start_emulator import StartEmulator
 from utilities.custom_timer import CustomTimer
@@ -37,6 +37,10 @@ class GameBotManager:
                 try:
                     game_modes[self.game_mode]()
                 except RestartLoopException:
+                    continue
+                except LoadingStuckException as e:
+                    print(f"Erro: {e}")
+                    GameRestarter.restart_in_loading()
                     continue
         else:
             print(f'Modo de jogo inválido: {self.game_mode}')
