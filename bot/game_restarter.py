@@ -11,7 +11,11 @@ class GameRestarter:
     @staticmethod
     def restart_generic_error():
         # Código para clicar no botão "OK" e reiniciar o jogo
-        click_with_variation((289, 636), 40, 15)
+        image_path = "bot/screenshots/screens/error_screen.png"
+        image_region = (92, 508, 404, 310)
+        click_location = find_image_on_screen(image_path, image_region)
+
+        click_with_variation(click_location, 40, 15)
         CustomTimer.sleep(13)
 
         LoadingScreen.wait()

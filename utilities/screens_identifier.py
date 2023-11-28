@@ -25,7 +25,7 @@ def is_winner_screen():
 def is_error_screen():
     # Lógica para verificar se está na tela de erro
     image_path = "bot/screenshots/screens/error_screen.png"
-    image_region = (242, 616, 84, 44)
+    image_region = (92, 508, 404, 310)
 
     return is_image_on_screen(image_path, image_region)
 
