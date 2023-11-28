@@ -1,6 +1,6 @@
 from bot.exceptions import RestartLoopException
 from bot.loading_screen import LoadingScreen
-from utilities.click_manager import ClickManager
+from utilities.click_manager import click_with_variation, normal_click
 from utilities.custom_timer import CustomTimer
 from utilities.image_identifier import is_image_on_screen, find_image_on_screen
 from utilities.screens_identifier import is_map_screen
@@ -11,9 +11,7 @@ class GameRestarter:
     @staticmethod
     def restart_generic_error():
         # Código para clicar no botão "OK" e reiniciar o jogo
-        cm = ClickManager()
-
-        cm.click_with_variation((289, 636), 40, 15)
+        click_with_variation((289, 636), 40, 15)
         CustomTimer.sleep(13)
 
         LoadingScreen.wait()
@@ -32,8 +30,7 @@ class GameRestarter:
 
             click_location = find_image_on_screen(image_path, image_region)
 
-            cm = ClickManager()
-            cm.normal_click(click_location)
+            normal_click(click_location)
 
             CustomTimer.sleep(1)
 
@@ -44,7 +41,7 @@ class GameRestarter:
 
             click_location = find_image_on_screen(image_path, image_region)
 
-            cm.normal_click(click_location)
+            normal_click(click_location)
 
             CustomTimer.sleep(13)
 
@@ -65,17 +62,15 @@ class GameRestarter:
             CustomTimer.sleep(10)
 
             if is_pause_screen():
-                cm = ClickManager()
-
                 print("Partida em andamento identificada")
                 # clica no botão de pause
-                cm.click_with_variation((326, 83), 5, 5)
+                click_with_variation((326, 83), 5, 5)
 
                 CustomTimer.sleep(1, 1)
 
                 print("Rendendo-se")
                 # clica no botão render-se
-                cm.click_with_variation((471, 171), 30, 10)
+                click_with_variation((471, 171), 30, 10)
 
                 CustomTimer.sleep(2, 1)
 
