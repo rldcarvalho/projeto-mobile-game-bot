@@ -1,12 +1,10 @@
-from utilities.image_identifier import ImageIdentifier
+from utilities.image_identifier import is_image_on_screen
 import pyautogui
 import random
 from utilities.custom_timer import CustomTimer
 
 
 class ClickManager:
-    ii = ImageIdentifier()
-
     def __init__(self):
         pass
 
@@ -37,13 +35,11 @@ class ClickManager:
         self.normal_click((x, y))
 
     def click_if_image_found(self, image_path, click_location, search_region=None):
-        ii = ImageIdentifier()
-        if ii.is_image_on_screen(image_path, region=search_region):
+        if is_image_on_screen(image_path, region=search_region):
             self.normal_click(click_location)
         else:
             print("Imagem não encontrada na tela")
 
     def click_if_image_found_with_variation(self, image_path, click_location, search_region=None, x_variation=10, y_variation=10):
-        ii = ImageIdentifier()
-        if ii.is_image_on_screen(image_path, search_region):
+        if is_image_on_screen(image_path, search_region):
             self.click_with_variation(click_location, x_variation, y_variation)

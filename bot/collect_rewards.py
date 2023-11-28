@@ -2,7 +2,7 @@ from bot.game_restarter import GameRestarter
 from utilities.custom_timer import CustomTimer
 from bot.loading_screen import LoadingScreen
 from utilities.click_manager import ClickManager
-from utilities.image_identifier import ImageIdentifier
+from utilities.image_identifier import is_image_on_screen
 
 
 class CollectRewards:
@@ -90,14 +90,13 @@ class CollectRewards:
         CustomTimer.sleep(3, 1)
 
     def try_again(self):
-        im = ImageIdentifier()
         cm = ClickManager()
         image_path = "bot/screenshots/buttons/try_again_button.png"
         screen_region = (96, 967, 125, 33)
 
         if self.is_defeated():
             print("tentando novamente")
-            while im.is_image_on_screen(image_path, screen_region):
+            while is_image_on_screen(image_path, screen_region):
                 cm.click_with_variation((158, 985), 50, 15)
                 CustomTimer.sleep(3, 1)
 
@@ -107,19 +106,17 @@ class CollectRewards:
 
     @staticmethod
     def is_defeated():
-        im = ImageIdentifier()
         image_path = "bot/screenshots/buttons/try_again_button.png"
         screen_region = (96, 967, 125, 33)
 
-        return im.is_image_on_screen(image_path, screen_region)
+        return is_image_on_screen(image_path, screen_region)
 
     @staticmethod
     def is_winner():
-        im = ImageIdentifier()
         image_path = "bot/screenshots/buttons/win_continue_button.png"
         screen_region = (204, 966, 152, 34)
 
-        return im.is_image_on_screen(image_path, screen_region)
+        return is_image_on_screen(image_path, screen_region)
 
     # def collect_chest(self):
     #     cm = ClickManager()

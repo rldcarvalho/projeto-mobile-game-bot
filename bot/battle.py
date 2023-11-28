@@ -1,7 +1,7 @@
 from bot.game_restarter import GameRestarter
-from utilities.custom_timer import CustomTimer
 from utilities.click_manager import ClickManager
-from utilities.image_identifier import ImageIdentifier
+from utilities.custom_timer import CustomTimer
+from utilities.image_identifier import is_image_on_screen
 
 
 class Battle:
@@ -11,7 +11,6 @@ class Battle:
     # Realiza o procedimento para iniciar partida PVE
     def start_pve(self):
         cm = ClickManager()
-        im = ImageIdentifier()
 
         print("Inicio da partida")
         CustomTimer.sleep(2)
@@ -22,7 +21,7 @@ class Battle:
 
         count = 0
         while count < 3:
-            if im.is_image_on_screen(image_path, search_region):
+            if is_image_on_screen(image_path, search_region):
                 click_location = (279, 839)
                 cm.click_with_variation(click_location, 50, 50)
                 print("Batalha iniciada")
@@ -70,12 +69,11 @@ class Battle:
 
     # Verifica se está com pelo menos 4 de mana
     def have_mana(self):
-        id = ImageIdentifier()
 
         four_mana_path = "bot/screenshots/four_mana.png"
         four_mana_region = (160, 983, 157, 41)
 
-        return id.is_image_on_screen(four_mana_path, four_mana_region)
+        return is_image_on_screen(four_mana_path, four_mana_region)
 
     # Seleciona um minion aleatório e o coloca em baixo da torre
     def play_minion(self):
