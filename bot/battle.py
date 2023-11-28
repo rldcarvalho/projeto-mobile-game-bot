@@ -83,3 +83,5 @@ class Battle:
         CustomTimer.sleep(0.5, 0.5)
         click_with_variation(base_tower, 100, 50)
         CustomTimer.sleep(0.5, 0.5)
+
+#TODO ajustar para 6 mana

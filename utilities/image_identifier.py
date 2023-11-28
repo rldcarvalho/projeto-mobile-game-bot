@@ -1,6 +1,8 @@
 import pyautogui
 import pytesseract
 
+TESSERACT_EXE_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
 
 def is_image_on_screen(image_path, region=None, confidence=0.8):
 
@@ -35,7 +37,7 @@ def extract_text_in_image(region=None):
 
     screen = pyautogui.screenshot(region=region)
 
-    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+    pytesseract.pytesseract.tesseract_cmd = TESSERACT_EXE_PATH
     text = pytesseract.image_to_string(screen, lang="por")
 
     return ' '.join(text.split())

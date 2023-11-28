@@ -3,7 +3,7 @@ from bot.loading_screen import LoadingScreen
 from utilities.click_manager import click_with_variation, normal_click
 from utilities.custom_timer import CustomTimer
 from utilities.image_identifier import is_image_on_screen, find_image_on_screen
-from utilities.screens_identifier import is_map_screen
+from utilities.screens_identifier import is_map_screen, is_pause_screen, is_error_screen, is_game_open_in_mumu
 
 
 class GameRestarter:
@@ -75,27 +75,3 @@ class GameRestarter:
                 CustomTimer.sleep(2, 1)
 
                 LoadingScreen.wait()
-
-
-
-def is_error_screen():
-    # Lógica para verificar se está na tela de erro
-    image_path = "bot/screenshots/screens/error_screen.png"
-    image_region = (242, 616, 84, 44)
-
-    return is_image_on_screen(image_path, image_region)
-
-
-def is_pause_screen():
-    # Lógica para verificar se está na tela de pause
-    image_path = "bot/screenshots/screens/pause_screen.png"
-    image_region = (304, 60, 45, 45)
-
-    return is_image_on_screen(image_path, image_region)
-
-
-def is_game_open_in_mumu():
-    image_path = "bot/screenshots/mumu_mini_game_icon.png"
-    image_region = (54, 5, 217, 30)
-
-    return is_image_on_screen(image_path, image_region)

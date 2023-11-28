@@ -1,4 +1,4 @@
-from utilities.window_handler import window_handler
+from utilities.windowhandler import WindowHandler
 from utilities.custom_timer import CustomTimer
 
 
@@ -10,7 +10,7 @@ class StartEmulator:
         Parameters:
         - name (str): Nome da janela do emulador.
         """
-        wh_emulator = window_handler(name)
+        wh_emulator = WindowHandler(name)
 
         # foca a janela
         wh_emulator.focus_window()

@@ -1,7 +1,7 @@
 import pygetwindow as gw
 
 
-class window_handler:
+class WindowHandler:
     def __init__(self, window_title):
         self.window_title = window_title
         self.window = None
