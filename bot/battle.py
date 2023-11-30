@@ -39,14 +39,14 @@ class Battle:
         print("Começando a soltar os minions")
 
         count = 0
-        while count < 6:
+        while count < 12:
             if self.have_mana():
                 self.play_minion()
                 count = 0
-                CustomTimer.sleep(1, 0.5)
+                CustomTimer.sleep(1.5, 0.5)
             else:
                 count += 1
-                CustomTimer.sleep(2, 0.5)
+                CustomTimer.sleep(1, 0.5)
         print("Fim da batalha, parando de soltar minions")
 
         GameRestarter.check_and_handle_error()
@@ -65,13 +65,14 @@ class Battle:
 
         GameRestarter.check_and_handle_error()
 
-    # Verifica se está com pelo menos 4 de mana
-    def have_mana(self):
+    @staticmethod
+    def have_mana():
+        # Verifica se está com pelo menos 6 de mana
+        mana_image_path = "bot/screenshots/six_mana.png"
+        four_mana_region = (282, 989, 35, 29)
+        six_mana_region = (167, 986, 229, 35)
 
-        four_mana_path = "bot/screenshots/four_mana.png"
-        four_mana_region = (160, 983, 157, 41)
-
-        return is_image_on_screen(four_mana_path, four_mana_region)
+        return is_image_on_screen(mana_image_path, six_mana_region, 0.90)
 
     # Seleciona um minion aleatório e o coloca em baixo da torre
     def play_minion(self):

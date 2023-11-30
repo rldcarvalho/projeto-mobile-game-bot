@@ -20,7 +20,7 @@ class SelectGameMode:
         CustomTimer.sleep(1, 0.5)
 
         # verifica se está na tela de missoes
-        if not self.is_mission_screen():
+        if not is_mission_screen():
             os._exit(0)
 
         # inicia uma missão aleatória
@@ -31,7 +31,7 @@ class SelectGameMode:
 
     def pvp(self):
 
-        if not self.is_pvp_screen():
+        if not is_pvp_screen():
             self.center_map()
             self.go_to_pvp_screen()
 
