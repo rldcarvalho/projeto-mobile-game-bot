@@ -28,6 +28,31 @@ class CollectRewards:
                 count += 1
                 CustomTimer.sleep(3, 1)
 
+    def after_pve(self):
+        print("Coletando recompensas")
+        count = 0
+        while count <= 6:
+            if is_winner_screen():
+                click_location = (284, 920)
+                click_with_variation(click_location, 50, 15)
+                print("retornando ao mapa")
+                CustomTimer.sleep(5, 1)
+                break
+            elif is_defeated_screen():
+                click_location = (439, 937)
+                click_with_variation(click_location, 50, 15)
+                print("retornar ao mapa")
+                CustomTimer.sleep(3, 1)
+                break
+            else:
+                if count > 5:
+                    raise RuntimeError("Recompensa não encontrada.")
+                count += 1
+                CustomTimer.sleep(3, 1)
+
+        LoadingScreen.wait()
+        CustomTimer.sleep(2, 1)
+
     def after_pvp(self):
 
         print("coletando XP")

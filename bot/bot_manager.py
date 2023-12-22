@@ -54,8 +54,8 @@ class GameBotManager:
     def pve(self):
         self.sgm.pve_loser(3)
         self.battle.start_pve()
-        self.battle.dont_defend_tower()
-        self.cr.try_again()
+        self.battle.defend_tower()
+        self.cr.after_pve()
 
     def mission(self):
         self.sgm.mission()

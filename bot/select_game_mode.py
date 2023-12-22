@@ -70,7 +70,7 @@ class SelectGameMode:
         locations = {
             1: (307, 256),
             2: (307, 377),
-            3: (307, 497),
+            3: (323, 501),
             4: (307, 618),
             5: (307, 737),
         }
@@ -79,7 +79,7 @@ class SelectGameMode:
 
         if is_pve_screen():
             print(f"Abrindo o mapa numero {number}")
-            click_with_variation(click_location, 70, 15)
+            click_with_variation(click_location, 70, 5)
             CustomTimer.sleep(1, 1)
 
             print("iniciando a missão PVE")
